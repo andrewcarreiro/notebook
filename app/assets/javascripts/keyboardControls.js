@@ -7,22 +7,23 @@
  */
 function knownKeyboardControls () {
 	/** default interpretation of keycodes to human-readable characters.*/
-	var KEYCODES = {
-		"n" : 78,
-		"c" : 67,
-		"u" : 85,
-		"l" : 76,
-		"i" : 73,
-		"." : 190, // also >
-		"," : 180 // also <
-	};
 
 	return [
+		// ? => keyboard control
+		{
+			"input" : [
+				{ key : "?", shiftKey : true, ctrlKey : false }
+			],
+			"result" : () => {
+				$("#keyboard-controls-help-modal").openModal()
+			}
+		},
+
 		// N+c => new character form
 		{
 			"input" : [
-				{ key : KEYCODES["n"], shiftKey : true, ctrlKey : false },
-				{ key : KEYCODES["c"], shiftKey : false, ctrlKey : false }
+				{ key : "N", shiftKey : true, ctrlKey : false },
+				{ key : "c", shiftKey : false, ctrlKey : false }
 			],
 			"result" : () => {
 				document.location.pathname = "/plan/characters/new";
@@ -32,8 +33,8 @@ function knownKeyboardControls () {
 		// N+u => new universe form
 		{
 			"input" : [
-				{ key : KEYCODES["n"], shiftKey : true, ctrlKey : false },
-				{ key : KEYCODES["u"], shiftKey : false, ctrlKey : false }
+				{ key : "N", shiftKey : true, ctrlKey : false },
+				{ key : "u", shiftKey : false, ctrlKey : false }
 			],
 			"result" : () => {
 				document.location.pathname = "/plan/universes/new";
@@ -43,8 +44,8 @@ function knownKeyboardControls () {
 		// N+l => new location form
 		{
 			"input" : [
-				{ key : KEYCODES["n"], shiftKey : true, ctrlKey : false },
-				{ key : KEYCODES["l"], shiftKey : false, ctrlKey : false }
+				{ key : "N", shiftKey : true, ctrlKey : false },
+				{ key : "l", shiftKey : false, ctrlKey : false }
 			],
 			"result" : () => {
 				document.location.pathname = "/plan/locations/new";
@@ -54,8 +55,8 @@ function knownKeyboardControls () {
 		// N+i => new item form
 		{
 			"input" : [
-				{ key : KEYCODES["n"], shiftKey : true, ctrlKey : false },
-				{ key : KEYCODES["i"], shiftKey : false, ctrlKey : false }
+				{ key : "N", shiftKey : true, ctrlKey : false },
+				{ key : "i", shiftKey : false, ctrlKey : false }
 			],
 			"result" : () => {
 				document.location.pathname = "/plan/items/new";
@@ -86,7 +87,7 @@ function keyboardControlManager ( keyboardControls ) {
 
 		// if not modifier, continue
 		stackManager.add({
-			"key" : event.keyCode, 
+			"key" : event.key, 
 			"shiftKey" : event.shiftKey,
 			"ctrlKey" : event.ctrlKey
 		});
